@@ -104,7 +104,7 @@ public class ArrayTasks {
             }
         }
         int[] newArr = new int[newArrIndex];
-        for (int i = 0, s=0; i <newArrIndex ; i++) {
+        for (int i = 0, s=0; i < arr.length; i++) {
             if(arr[i]>0){
                 newArr[s]=arr[i];
                 s++;
@@ -136,50 +136,48 @@ public class ArrayTasks {
             shortLength = arr[0].length;
             firstIsShort = true;
         }
-        readyToReturnArr = new int[shortLength][longLength];
+        readyToReturnArr = new int[2][];
+        readyToReturnArr[0] = new int[shortLength];
+        readyToReturnArr[1] = new int[longLength];
         if(firstIsShort){
             int bigOne = 0;
-            for (int j = shortLength-1; j <=0 ; j--) {
-                for (int i = 1; i < shortLength; i++) {
+            for (int j = shortLength-1; j >=0 ; j--) {
+                for (int i = 0; i < shortLength; i++) {
                     if (bigOne < arr[0][i]) {
                         bigOne = arr[0][i];
                     }
                 }
-                arr[0][j]=bigOne;
+                readyToReturnArr[0][j]=bigOne;
                 for (int i = 0; i <shortLength; i++) {
                     if(arr[0][i]==bigOne){
                         arr[0][i]=0;
                         bigOne=0;
                     }
                 }
-
             }
-
-            for (int j = longLength-1; j <=0 ; j--) {
-                for (int i = 1; i < longLength; i++) {
+            for (int j = longLength-1; j >=0 ; j--) {
+                for (int i = 0; i < longLength; i++) {
                     if (bigOne < arr[1][i]) {
                         bigOne = arr[1][i];
                     }
                 }
-                arr[1][j]=bigOne;
+                readyToReturnArr[1][j]=bigOne;
                 for (int i = 0; i <longLength; i++) {
                     if(arr[1][i]==bigOne){
                         arr[1][i]=0;
                         bigOne=0;
                     }
                 }
-
             }
-
         }else{
             int bigOne = 0;
-            for (int j = shortLength-1; j <=0 ; j--) {
-                for (int i = 1; i < shortLength; i++) {
+            for (int j = shortLength-1; j >=0 ; j--) {
+                for (int i = 0; i < shortLength; i++) {
                     if (bigOne < arr[1][i]) {
                         bigOne = arr[1][i];
                     }
                 }
-                arr[1][j]=bigOne;
+                readyToReturnArr[0][j]=bigOne;
                 for (int i = 0; i <shortLength; i++) {
                     if(arr[1][i]==bigOne){
                         arr[1][i]=0;
@@ -188,14 +186,13 @@ public class ArrayTasks {
                 }
 
             }
-
-            for (int j = longLength-1; j <=0 ; j--) {
-                for (int i = 1; i < longLength; i++) {
+            for (int j = longLength-1; j >=0 ; j--) {
+                for (int i = 0; i < longLength; i++) {
                     if (bigOne < arr[0][i]) {
                         bigOne = arr[0][i];
                     }
                 }
-                arr[0][j]=bigOne;
+                readyToReturnArr[1][j]=bigOne;
                 for (int i = 0; i <longLength; i++) {
                     if(arr[0][i]==bigOne){
                         arr[0][i]=0;
