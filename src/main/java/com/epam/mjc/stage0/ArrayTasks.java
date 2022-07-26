@@ -11,7 +11,7 @@ public class ArrayTasks {
      * Return a String[] array that will list all the seasons of the year, starting with winter.
      */
     public String[] seasonsArray() {
-
+        return new String[]{"winter", "spring", "summer", "autumn"};
     }
 
     /**
@@ -25,7 +25,11 @@ public class ArrayTasks {
      * length = 5  -> [1, 2, 3, 4, 5]
      */
     public int[] generateNumbers(int length) {
-
+        int[] arr = new int[length];
+        for (int i = 0; i<length ; i++) {
+            arr[i]=i+1;
+        }
+        return arr;
     }
 
     /**
@@ -37,7 +41,11 @@ public class ArrayTasks {
      * arr = [5, -3, -4] -> sum = -2
      */
     public int totalSum(int[] arr) {
-
+        int sum=0;
+        for (int i = 0; i < arr.length; i++) {
+            sum+=arr[i];
+        }
+        return sum;
     }
 
     /**
@@ -50,7 +58,12 @@ public class ArrayTasks {
      * arr = [5, -3, -4],   number = 10    ->  -1
      */
     public int findIndexOfNumber(int[] arr, int number) {
-
+        int index = 0;
+        for (int i = 0; i < arr.length ; i++) {
+            if(arr[i]==number) return i;
+            index = -1;
+        }
+        return index;
     }
 
     /**
@@ -63,7 +76,13 @@ public class ArrayTasks {
      * arr = ["pineapple", "apple", "pen"] -> ["pen", "apple", "pineapple"]
      */
     public String[] reverseArray(String[] arr) {
-
+        String [] reverseArr = new String[arr.length];
+        int reverseArrindex = arr.length-1;
+        for (int i = 0; i < arr.length; i++) {
+            reverseArr[reverseArrindex]=arr[i];
+            reverseArrindex--;
+        }
+        return reverseArr;
     }
 
     /**
@@ -78,7 +97,20 @@ public class ArrayTasks {
      * arr = [1, 2]         -> [1, 2]
      */
     public int[] getOnlyPositiveNumbers(int[] arr) {
-
+        int newArrIndex=0;
+        for (int i = 0; i < arr.length; i++) {
+            if(arr[i]>0){
+                newArrIndex++;
+            }
+        }
+        int[] newArr = new int[newArrIndex];
+        for (int i = 0, s=0; i <newArrIndex ; i++) {
+            if(arr[i]>0){
+                newArr[s]=arr[i];
+                s++;
+            }
+        }
+        return newArr;
     }
 
     /**
@@ -92,6 +124,88 @@ public class ArrayTasks {
      * arr = [[5, 4], [7]]       -> [[7], [4, 5]]
      */
     public int[][] sortRaggedArray(int[][] arr) {
+        int[][] readyToReturnArr;
+        int shortLength, longLength;
+        boolean firstIsShort;
+        if(arr[0].length>arr[1].length){
+            longLength = arr[0].length;
+            shortLength = arr[1].length;
+            firstIsShort = false;
+        }else{
+            longLength = arr[1].length;
+            shortLength = arr[0].length;
+            firstIsShort = true;
+        }
+        readyToReturnArr = new int[shortLength][longLength];
+        if(firstIsShort){
+            int bigOne = 0;
+            for (int j = shortLength-1; j <=0 ; j--) {
+                for (int i = 1; i < shortLength; i++) {
+                    if (bigOne < arr[0][i]) {
+                        bigOne = arr[0][i];
+                    }
+                }
+                arr[0][j]=bigOne;
+                for (int i = 0; i <shortLength; i++) {
+                    if(arr[0][i]==bigOne){
+                        arr[0][i]=0;
+                        bigOne=0;
+                    }
+                }
 
+            }
+
+            for (int j = longLength-1; j <=0 ; j--) {
+                for (int i = 1; i < longLength; i++) {
+                    if (bigOne < arr[1][i]) {
+                        bigOne = arr[1][i];
+                    }
+                }
+                arr[1][j]=bigOne;
+                for (int i = 0; i <longLength; i++) {
+                    if(arr[1][i]==bigOne){
+                        arr[1][i]=0;
+                        bigOne=0;
+                    }
+                }
+
+            }
+
+        }else{
+            int bigOne = 0;
+            for (int j = shortLength-1; j <=0 ; j--) {
+                for (int i = 1; i < shortLength; i++) {
+                    if (bigOne < arr[1][i]) {
+                        bigOne = arr[1][i];
+                    }
+                }
+                arr[1][j]=bigOne;
+                for (int i = 0; i <shortLength; i++) {
+                    if(arr[1][i]==bigOne){
+                        arr[1][i]=0;
+                        bigOne=0;
+                    }
+                }
+
+            }
+
+            for (int j = longLength-1; j <=0 ; j--) {
+                for (int i = 1; i < longLength; i++) {
+                    if (bigOne < arr[0][i]) {
+                        bigOne = arr[0][i];
+                    }
+                }
+                arr[0][j]=bigOne;
+                for (int i = 0; i <longLength; i++) {
+                    if(arr[0][i]==bigOne){
+                        arr[0][i]=0;
+                        bigOne=0;
+                    }
+                }
+
+            }
+        }
+
+        return readyToReturnArr;
     }
 }
